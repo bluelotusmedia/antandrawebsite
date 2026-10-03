@@ -13,14 +13,14 @@
 
     <style>
         :root {
-            /* Psychedelic Cosmic Color Palette */
-            --color-bg: #05020a;
-            --color-cyan: #00f2fe;
-            --color-magenta: #ff0844;
-            --color-magenta-glow: rgba(255, 8, 68, 0.7);
-            --color-cyan-glow: rgba(0, 242, 254, 0.7);
-            --color-text-main: #ffffff;
-            --color-text-muted: #b3b3b3;
+            /* Lush Green & Deep Jungle Color Palette */
+            --color-bg: #020a04;
+            --color-lush-green: #00ff55;
+            --color-deep-green: #00882b;
+            --color-green-glow: rgba(0, 255, 85, 0.6);
+            --color-ambient-glow: rgba(0, 136, 43, 0.4);
+            --color-text-main: #e0f2e5;
+            --color-text-muted: #8fb39a;
             
             /* Typography */
             --font-display: 'Michroma', sans-serif;
@@ -31,7 +31,6 @@
             --spacing-md: 1rem;
             --spacing-lg: 2rem;
             --spacing-xl: 4rem;
-            --border-radius: 4px;
         }
 
         *, *::before, *::after {
@@ -63,47 +62,58 @@
             height: 100vh;
             z-index: -1;
             overflow: hidden;
-            background: radial-gradient(circle at center, #10061e 0%, #05020a 100%);
+            background: radial-gradient(circle at center, #041407 0%, #020a04 100%);
         }
 
-        .ambient-bg__nebula {
+        /* Ambient Lighting from the bio PDF vibe */
+        .ambient-bg__glow {
             position: absolute;
             width: 150vw;
             height: 150vh;
             top: -25vh;
             left: -25vw;
             background-image: 
-                radial-gradient(circle at 20% 30%, var(--color-magenta-glow) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, var(--color-cyan-glow) 0%, transparent 40%);
-            filter: blur(100px);
-            opacity: 0.4;
-            animation: nebula-drift 20s ease-in-out infinite alternate;
+                radial-gradient(circle at 30% 70%, var(--color-ambient-glow) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, var(--color-green-glow) 0%, transparent 40%);
+            filter: blur(120px);
+            opacity: 0.5;
+            animation: glow-shift 15s ease-in-out infinite alternate;
         }
 
-        .ambient-bg__stars {
+        /* Animated Geometric Triangles */
+        .ambient-bg__triangles-layer-1 {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            opacity: 0.3;
-            animation: star-twinkle 4s infinite alternate;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 10l30 52H10z' fill='none' stroke='rgba(0, 255, 85, 0.05)' stroke-width='1'/%3E%3C/svg%3E");
+            animation: drift-slow 40s linear infinite;
         }
 
-        @keyframes nebula-drift {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.1) rotate(5deg); }
+        .ambient-bg__triangles-layer-2 {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 20l40 69H20z' fill='rgba(0, 255, 85, 0.02)' stroke='rgba(0, 255, 85, 0.08)' stroke-width='1'/%3E%3C/svg%3E");
+            animation: drift-fast 25s linear infinite reverse;
         }
 
-        @keyframes star-twinkle {
-            0% { opacity: 0.1; }
-            100% { opacity: 0.5; }
+        @keyframes glow-shift {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(-2%, 2%); }
+        }
+
+        @keyframes drift-slow {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(80px) rotate(5deg); }
+        }
+
+        @keyframes drift-fast {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(120px) rotate(-3deg); }
         }
 
         .page-container {
@@ -119,128 +129,42 @@
 
         .header {
             margin-bottom: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            color: #ffffff;
-            text-transform: uppercase;
-            text-shadow: 
-                0 0 5px var(--color-cyan),
-                0 0 15px var(--color-cyan),
-                0 0 30px var(--color-cyan),
-                0 0 60px var(--color-magenta);
-            animation: neon-pulse 3s infinite alternate;
-            margin-bottom: var(--spacing-sm);
+        .logo-container {
+            width: 100%;
+            max-width: 450px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .logo-svg {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .logo-svg .glow-effect {
+            filter: drop-shadow(0px 0px 8px var(--color-lush-green));
+            animation: svg-pulse 3s infinite alternate;
+        }
+
+        @keyframes svg-pulse {
+            0% { filter: drop-shadow(0px 0px 5px var(--color-lush-green)) drop-shadow(0px 0px 15px var(--color-deep-green)); }
+            100% { filter: drop-shadow(0px 0px 2px var(--color-lush-green)) drop-shadow(0px 0px 8px var(--color-deep-green)); }
         }
 
         .subtitle {
             font-family: var(--font-body);
-            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: 500;
-            color: var(--color-cyan);
-            letter-spacing: 0.3em;
+            color: var(--color-lush-green);
+            letter-spacing: 0.4em;
             text-transform: uppercase;
             margin-bottom: var(--spacing-xl);
-            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
-        }
-
-        @keyframes neon-pulse {
-            0% { text-shadow: 0 0 5px var(--color-cyan), 0 0 15px var(--color-cyan), 0 0 30px var(--color-cyan), 0 0 60px var(--color-magenta); }
-            100% { text-shadow: 0 0 2px var(--color-cyan), 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan), 0 0 40px var(--color-magenta); }
-        }
-
-        .main-content {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .description {
-            color: var(--color-text-muted);
-            font-size: 1.2rem;
-            margin-bottom: var(--spacing-xl);
-            font-weight: 400;
-        }
-
-        .subscribe-form {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-xl);
-            position: relative;
-        }
-
-        @media (min-width: 600px) {
-            .subscribe-form {
-                flex-direction: row;
-            }
-        }
-
-        .subscribe-form__input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            border-radius: var(--border-radius);
-            color: var(--color-text-main);
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .subscribe-form__input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .subscribe-form__input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--color-cyan);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-        }
-
-        .subscribe-form__button {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 1px solid var(--color-magenta);
-            border-radius: var(--border-radius);
-            color: var(--color-magenta);
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .subscribe-form__button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-magenta);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-        }
-
-        .subscribe-form__button:hover {
-            color: #ffffff;
-            box-shadow: 0 0 20px var(--color-magenta-glow);
-        }
-
-        .subscribe-form__button:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
+            text-shadow: 0 0 10px rgba(0, 255, 85, 0.4);
         }
 
         .footer {
@@ -264,29 +188,30 @@
             color: var(--color-text-muted);
             text-decoration: none;
             font-family: var(--font-display);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             transition: all 0.3s ease;
             position: relative;
+            padding-bottom: 5px;
         }
 
         .social-links__link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 1px;
-            background: var(--color-cyan);
+            background: var(--color-lush-green);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
             transform-origin: right;
         }
 
         .social-links__link:hover {
-            color: var(--color-cyan);
-            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+            color: var(--color-lush-green);
+            text-shadow: 0 0 8px rgba(0, 255, 85, 0.6);
         }
 
         .social-links__link:hover::after {
@@ -297,17 +222,32 @@
 </head>
 <body>
 
-    <!-- Ambient Background Elements -->
+    <!-- Ambient Geometric Background Elements -->
     <div class="ambient-bg" aria-hidden="true">
-        <div class="ambient-bg__nebula"></div>
-        <div class="ambient-bg__stars"></div>
+        <div class="ambient-bg__glow"></div>
+        <div class="ambient-bg__triangles-layer-1"></div>
+        <div class="ambient-bg__triangles-layer-2"></div>
     </div>
 
     <!-- Main Page Content -->
     <main class="page-container">
         
         <header class="header">
-            <h1 class="logo">Antandra</h1>
+            <!-- Custom SVG Recreated Logo -->
+            <div class="logo-container">
+                <svg class="logo-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+                    <g class="glow-effect">
+                        <!-- Interlocking Geometric Merkaba/Triangle Emblem -->
+                        <g stroke="var(--color-lush-green)" stroke-width="2" fill="none" transform="translate(250, 45)">
+                            <polygon points="0,-30 26,15 -26,15" />
+                            <polygon points="0,30 26,-15 -26,-15" />
+                            <circle cx="0" cy="0" r="8" fill="var(--color-bg)" stroke="var(--color-lush-green)"/>
+                        </g>
+                        <!-- Stylized Antandra Typography -->
+                        <text x="50%" y="130" text-anchor="middle" font-family="'Michroma', sans-serif" font-size="44" fill="#ffffff" letter-spacing="12">ANTANDRA</text>
+                    </g>
+                </svg>
+            </div>
             <h2 class="subtitle">Coming Soon</h2>
         </header>
 
