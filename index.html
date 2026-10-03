@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antandra | Coming Soon</title>
+    <meta name="description" content="The official website for Antandra. Psychedelic bass music, new releases, and cosmic frequencies coming soon.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Psychedelic Cosmic Color Palette */
+            --color-bg: #05020a;
+            --color-cyan: #00f2fe;
+            --color-magenta: #ff0844;
+            --color-magenta-glow: rgba(255, 8, 68, 0.7);
+            --color-cyan-glow: rgba(0, 242, 254, 0.7);
+            --color-text-main: #ffffff;
+            --color-text-muted: #b3b3b3;
+            
+            /* Typography */
+            --font-display: 'Michroma', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+            
+            /* Spacing & Layout */
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --border-radius: 4px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #10061e 0%, #05020a 100%);
+        }
+
+        .ambient-bg__nebula {
+            position: absolute;
+            width: 150vw;
+            height: 150vh;
+            top: -25vh;
+            left: -25vw;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--color-magenta-glow) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, var(--color-cyan-glow) 0%, transparent 40%);
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: nebula-drift 20s ease-in-out infinite alternate;
+        }
+
+        .ambient-bg__stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.3;
+            animation: star-twinkle 4s infinite alternate;
+        }
+
+        @keyframes nebula-drift {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        @keyframes star-twinkle {
+            0% { opacity: 0.1; }
+            100% { opacity: 0.5; }
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 800px;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .header {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 5px var(--color-cyan),
+                0 0 15px var(--color-cyan),
+                0 0 30px var(--color-cyan),
+                0 0 60px var(--color-magenta);
+            animation: neon-pulse 3s infinite alternate;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 500;
+            color: var(--color-cyan);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-xl);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        @keyframes neon-pulse {
+            0% { text-shadow: 0 0 5px var(--color-cyan), 0 0 15px var(--color-cyan), 0 0 30px var(--color-cyan), 0 0 60px var(--color-magenta); }
+            100% { text-shadow: 0 0 2px var(--color-cyan), 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan), 0 0 40px var(--color-magenta); }
+        }
+
+        .main-content {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .description {
+            color: var(--color-text-muted);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xl);
+            font-weight: 400;
+        }
+
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+
+        @media (min-width: 600px) {
+            .subscribe-form {
+                flex-direction: row;
+            }
+        }
+
+        .subscribe-form__input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: var(--border-radius);
+            color: var(--color-text-main);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .subscribe-form__input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .subscribe-form__input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .subscribe-form__button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--color-magenta);
+            border-radius: var(--border-radius);
+            color: var(--color-magenta);
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .subscribe-form__button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-magenta);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .subscribe-form__button:hover {
+            color: #ffffff;
+            box-shadow: 0 0 20px var(--color-magenta-glow);
+        }
+
+        .subscribe-form__button:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .footer {
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .social-links__item {
+            display: inline-block;
+        }
+
+        .social-links__link {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-links__link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--color-cyan);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .social-links__link:hover {
+            color: var(--color-cyan);
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+        }
+
+        .social-links__link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Background Elements -->
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="ambient-bg__nebula"></div>
+        <div class="ambient-bg__stars"></div>
+    </div>
+
+    <!-- Main Page Content -->
+    <main class="page-container">
+        
+        <header class="header">
+            <h1 class="logo">Antandra</h1>
+            <h2 class="subtitle">Coming Soon</h2>
+        </header>
+
+        <section class="main-content">
+            <p class="description">Prepare for a new dimension of psychedelic bass frequencies. Enter your email to be the first to know when we launch.</p>
+            
+            <form class="subscribe-form" action="#" method="POST" onsubmit="event.preventDefault(); this.querySelector('button').innerText = 'Transmitting...'; setTimeout(() => this.innerHTML = '<p style=\'color: var(--color-cyan); font-family: var(--font-display);\'>Signal Received. Welcome to the collective.</p>', 1500);">
+                <input 
+                    type="email" 
+                    class="subscribe-form__input" 
+                    placeholder="Enter your transmission address..." 
+                    required 
+                    aria-label="Email address"
+                >
+                <button type="submit" class="subscribe-form__button">
+                    Initialize
+                </button>
+            </form>
+        </section>
+
+        <footer class="footer">
+            <ul class="social-links">
+                <li class="social-links__item">
+                    <a href="https://soundcloud.com/antandra" target="_blank" rel="noopener noreferrer" class="social-links__link">SoundCloud</a>
+                </li>
+                <li class="social-links__item">
+                    <a href="https://antandra.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="social-links__link">Bandcamp</a>
+                </li>
+                <li class="social-links__item">
+                    <a href="https://youtube.com/@antandra" target="_blank" rel="noopener noreferrer" class="social-links__link">YouTube</a>
+                </li>
+            </ul>
+        </footer>
+
+    </main>
+
+</body>
+</html>
